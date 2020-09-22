@@ -1,7 +1,7 @@
 # Boss Machine
 
 ## About 
-The concept and inital codebase were created by Codecademy. The focus of this project is to build a robust API to service the Boss Machine front-end app. Completing this project is part of their Web Development career path.
+The concept and inital codebase were created by <a href="https://www.codecademy.com" target="_blank">Codecademy</a>. The focus of this project is to build a robust API to service the Boss Machine front-end app. Completing this project is part of their Web Development career path.
 
 The following include instructions for developing the Boss Machine API.
 
