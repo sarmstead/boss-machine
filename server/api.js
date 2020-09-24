@@ -22,6 +22,17 @@ apiRouter.post('/minions', (req, res, next) => {
     }
 });
 
+apiRouter.get('/minions/:minionId', (req, res, next) => {
+    const minionId = req.params.minionId;
+    const minionIdNaN = isNaN(Number(minionId));
+    const minion = db.getFromDatabaseById('minions', minionId);
+    if (minionId !== undefined && !minionIdNaN && minion !== undefined) {
+        res.send(minion);
+    } else {
+        res.status(404).send();
+    }
+});
+
 // '/api/ideas' routes
 apiRouter.param('ideas', (req, res, next, id) => {});
 
