@@ -76,6 +76,17 @@ apiRouter.post('/ideas', (req, res, next) => {
     }
 });
 
+apiRouter.get('/ideas/:ideaId', (req, res, next) => {
+    const ideaId = req.params.ideaId;
+    const ideaIdNaN = isNaN(Number(ideaId));
+    const idea = db.getFromDatabaseById('ideas', ideaId);
+    if (ideaId !== undefined && !ideaIdNaN && idea !== undefined) {
+        res.send(idea);
+    } else {
+        res.status(404).send();
+    }
+});
+
 // '/api/meetings' routes
 apiRouter.param('meetings', (req, res, next, id) => {});
 
