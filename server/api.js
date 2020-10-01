@@ -100,6 +100,18 @@ apiRouter.put('/ideas/:ideaId', (req, res, next) => {
     }
 });
 
+apiRouter.delete('/ideas/:ideaId', (req, res, next) => {
+    const ideaId = req.params.ideaId;
+    const idea = db.getFromDatabaseById('ideas', ideaId);
+    const ideaIdNaN = isNaN(Number(ideaId));
+    if (ideaId !== undefined && idea !== undefined && !ideaIdNaN) {
+        db.deleteFromDatabasebyId('ideas', ideaId);
+        res.status(204).send();
+    } else {
+        res.status(404).send();
+    }
+});
+
 // '/api/meetings' routes
 apiRouter.param('meetings', (req, res, next, id) => {});
 
