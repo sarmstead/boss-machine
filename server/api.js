@@ -6,8 +6,7 @@ const db = require('./db');
 // apiRouter.param('minions', (req, res, next, id) => {});
 
 apiRouter.get('/minions', (req, res, next) => {
-    const minionsArr = db.getAllFromDatabase('minions');
-    res.send(minionsArr);
+    res.send(db.getAllFromDatabase('minions'));
 });
 
 apiRouter.post('/minions', (req, res, next) => {
