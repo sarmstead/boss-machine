@@ -63,6 +63,19 @@ apiRouter.get('/ideas', (req, res, next) => {
     res.send(db.getAllFromDatabase('ideas'));
 });
 
+apiRouter.post('/ideas', (req, res, next) => {
+    const name = req.body.name;
+    const description = req.body.description;
+    const numWeeks = req.body.numWeeks;
+    const weeklyRevenue = req.body.weeklyRevenue;
+    if ((name !== undefined) && (description !== undefined) && (numWeeks !== undefined) && (weeklyRevenue !== undefined)) {
+        db.addToDatabase('ideas', req.body);
+        res.status(201).send(req.body);
+    } else {
+        res.status(404).send();
+    }
+});
+
 // '/api/meetings' routes
 apiRouter.param('meetings', (req, res, next, id) => {});
 
