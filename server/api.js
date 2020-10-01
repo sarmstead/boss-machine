@@ -33,6 +33,31 @@ apiRouter.get('/minions/:minionId', (req, res, next) => {
     }
 });
 
+apiRouter.put('/minions/:minionId', (req, res, next) => {
+    const newMinion = req.body;
+    const minionId = req.params.minionId;
+    const minion = db.getFromDatabaseById('minions', minionId);
+    const minionIdNaN = isNaN(Number(minionId));
+    if (minionId !== undefined && minion !== undefined && !minionIdNaN) {
+        db.updateInstanceInDatabase('minions', newMinion);
+        res.status(200).send(newMinion);
+    } else {
+        res.status(404).send();
+    }
+});
+
+apiRouter.delete('/minions/:minionId', (req, res, next) => {
+    const minionId = req.params.minionId;
+    const minion = db.getFromDatabaseById('minions', minionId);
+    const minionIdNaN = isNaN(Number(minionId));
+    if (minionId !== undefined && minion !== undefined && !minionIdNaN) {
+        db.deleteFromDatabasebyId('minions', minionId);
+        res.status(204).send();
+    } else {
+        res.status(404).send();
+    }
+});
+
 // '/api/ideas' routes
 apiRouter.param('ideas', (req, res, next, id) => {});
 
