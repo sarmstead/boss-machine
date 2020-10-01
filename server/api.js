@@ -1,6 +1,7 @@
 const express = require('express');
 const apiRouter = express.Router();
 const db = require('./db');
+const checkMillionDollarIdea = require('./checkMillionDollarIdea');
 
 // '/api/minions' routes
 // apiRouter.param('minions', (req, res, next, id) => {});
@@ -59,11 +60,12 @@ apiRouter.delete('/minions/:minionId', (req, res, next) => {
 
 // '/api/ideas' routes
 // apiRouter.param('ideas', (req, res, next, id) => {});
+
 apiRouter.get('/ideas', (req, res, next) => {
     res.send(db.getAllFromDatabase('ideas'));
 });
 
-apiRouter.post('/ideas', (req, res, next) => {
+apiRouter.post('/ideas', checkMillionDollarIdea, (req, res, next) => {
     const name = req.body.name;
     const description = req.body.description;
     const numWeeks = req.body.numWeeks;
