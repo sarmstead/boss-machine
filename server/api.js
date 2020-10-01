@@ -87,6 +87,19 @@ apiRouter.get('/ideas/:ideaId', (req, res, next) => {
     }
 });
 
+apiRouter.put('/ideas/:ideaId', (req, res, next) => {
+    const newIdea = req.body;
+    const ideaId = req.params.ideaId;
+    const idea = db.getFromDatabaseById('ideas', ideaId);
+    const ideaIdNaN = isNaN(Number(ideaId));
+    if (ideaId !== undefined && idea !== undefined && !ideaIdNaN) {
+        db.updateInstanceInDatabase('ideas', newIdea);
+        res.status(200).send(newIdea);
+    } else {
+        res.status(404).send();
+    }
+});
+
 // '/api/meetings' routes
 apiRouter.param('meetings', (req, res, next, id) => {});
 
