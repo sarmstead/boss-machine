@@ -59,7 +59,10 @@ apiRouter.delete('/minions/:minionId', (req, res, next) => {
 });
 
 // '/api/ideas' routes
-apiRouter.param('ideas', (req, res, next, id) => {});
+// apiRouter.param('ideas', (req, res, next, id) => {});
+apiRouter.get('/ideas', (req, res, next) => {
+    res.send(db.getAllFromDatabase('ideas'));
+});
 
 // '/api/meetings' routes
 apiRouter.param('meetings', (req, res, next, id) => {});
