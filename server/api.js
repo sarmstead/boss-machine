@@ -115,6 +115,21 @@ apiRouter.delete('/ideas/:ideaId', (req, res, next) => {
 });
 
 // '/api/meetings' routes
-apiRouter.param('meetings', (req, res, next, id) => {});
+// apiRouter.param('meetings', (req, res, next, id) => {});
+apiRouter.get('/meetings', (req, res, next) => {
+    res.send(db.getAllFromDatabase('meetings'));
+});
+
+apiRouter.post('/meetings', (req, res, next) => {
+    const newMeeting = db.createMeeting();
+    db.createMeeting();
+    db.addToDatabase('meetings', newMeeting);
+    res.status(201).send(newMeeting);
+});
+
+apiRouter.delete('/meetings', (req, res, next) => {
+    db.deleteAllFromDatabase('meetings');
+    res.status(204).send();
+});
 
 module.exports = apiRouter;
